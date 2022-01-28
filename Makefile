@@ -18,8 +18,12 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(OBJ) $(LIB_FLAGS) -o $(NAME)
 	@echo "${GREEN}Compile successful!${NC}"
 
-$(LIBFT): 
+$(LIBFT): libft/libft.h
 	@make -C libft
+
+libft/libft.h:
+	@git submodule init
+	@git submodule update
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
