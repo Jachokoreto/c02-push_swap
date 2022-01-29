@@ -19,7 +19,6 @@ $(NAME): $(LIBFT) $(OBJ)
 	@echo "${GREEN}Compile successful!${NC}"
 
 $(LIBFT): libft/libft.h
-	@make 
 	@make bonus -C libft
 
 libft/libft.h:

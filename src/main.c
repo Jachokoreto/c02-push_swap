@@ -1,21 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/29 22:52:06 by jatan             #+#    #+#             */
+/*   Updated: 2022/01/29 22:52:06 by jatan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+
+/**
+ * @brief
+ * Notes:
+ *
+ */
 
 int	main(int argc, char *argv[])
 {
 	char	**input;
-	t_list	*stack;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		i;
 
 	if (argc < 2)
 		exit_error("Run ./push_swap 5 2 3 1");
-	
-	printf("number of input: %d\n", argc);
-	printf("input: %s\n", argv[1]);
-
-	input = ft_split(argv[1],' ');
-	stack = init_stack(input);
-	display_stack(stack);
-
-	ft_lstclear(&stack, &free);
+	input = ft_split(argv[1], ' ');
+	create_stacks(input, &stack_a, &stack_b);
+	display_stacks(stack_a, stack_b);
+	push_swap(&stack_a, &stack_b, "sa");
+	push_swap(&stack_a, &stack_b, "pa");
+	push_swap(&stack_a, &stack_b, "ra");
+	push_swap(&stack_a, &stack_b, "rra");
+	ft_lstclear(&stack_a, &free);
+	ft_lstclear(&stack_b, &free);
+	i = -1;
+	while (input[++i])
+		free(input[i]);
+	free(input);
 	return (0);
 }
-

@@ -12,32 +12,47 @@
 
 #include "push_swap.h"
 
-t_list *init_stack(char **input)
+/**
+ * @brief Create stack a filled with int from array,
+ * and stack b empty using linked list.
+ * For every number, I malloc to store the int that
+ * the new node's content will point to, then link it
+ * after the previous nodes using ft_lstadd_back.
+ *
+ * @param input The array of input, each index is a number
+ * @param stack_a
+ * @param stack_b
+ */
+void	create_stacks(char **input, t_list **stack_a, t_list **stack_b)
 {
 	int		i;
 	int		*tmp;
-	t_list	*stack;
 
-	stack = NULL;
+	*stack_a = NULL;
+	*stack_b = NULL;
 	i = -1;
 	while (input[++i])
 	{
 		tmp = (void *)malloc(sizeof(int));
-		*tmp = ft_atoi(input[i]);	
-		ft_lstadd_back(&stack, ft_lstnew(tmp));
+		*tmp = ft_atoi(input[i]);
+		ft_lstadd_back(stack_a, ft_lstnew(tmp));
 	}
-	return (stack);
 }
 
-void	display_stack(t_list *stack)
+/**
+ * The functions below are for debugging
+ */
+
+void	display_stacks(t_list *stack_a, t_list *stack_b)
 {
-	ft_lstiter(stack, &display_node);
-	printf("done display stack\n");
+	printf("\033[0;34m=====STACK A=====\033[0m\n");
+	ft_lstiter(stack_a, &display_node);
+	printf("\033[0;35m=====STACK B=====\033[0m\n");
+	ft_lstiter(stack_b, &display_node);
+	ft_putendl_fd("++++++++++++++++++++++++", 1);
 }
 
 void	display_node(void *data)
 {
-	ft_putnbr_fd(*(int *)data, 1);
-	ft_putendl_fd("", 1);
+	printf("%p : %d\n", data, *(int *)data);
 }
-
