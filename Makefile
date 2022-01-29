@@ -1,6 +1,6 @@
 NAME = push_swap
 
-CC = gcc -Wall -Wextra -Werror
+CC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -19,7 +19,8 @@ $(NAME): $(LIBFT) $(OBJ)
 	@echo "${GREEN}Compile successful!${NC}"
 
 $(LIBFT): libft/libft.h
-	@make -C libft
+	@make 
+	@make bonus -C libft
 
 libft/libft.h:
 	@git submodule init
@@ -36,6 +37,10 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@echo "${RED}Removed $(NAME)...${NC}"
+
+re: fclean all
+
+.PHONY: clean fclean re all
 
 # Colors are great!
 # Formats are greater!
