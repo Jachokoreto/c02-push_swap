@@ -30,9 +30,9 @@ int	main(int argc, char *argv[])
 	input = ft_split(argv[1], ' ');
 	create_stacks(input, &stack_a, &stack_b);
 	display_stacks(stack_a, stack_b);
-	push_swap(&stack_a, &stack_b, "sa");
-	push_swap(&stack_a, &stack_b, "pa");
-	push_swap(&stack_a, &stack_b, "ra");
+	push_swap(&stack_a, &stack_b, "sb");
+	push_swap(&stack_a, &stack_b, "pb");
+	push_swap(&stack_a, &stack_b, "sb");
 	push_swap(&stack_a, &stack_b, "rra");
 	ft_lstclear(&stack_a, &free);
 	ft_lstclear(&stack_b, &free);

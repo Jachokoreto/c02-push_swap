@@ -19,16 +19,25 @@
  * I have to cast it into int pointer,
  * then dereference it to assign new value
  *
- * @param head Pointer to the node for swap
+ *    *(int *)head->content
+ *    ^ ^^^^^---- this is casting
+ *    |---------- this is dereference
+ *
+ * @param head Pointer to the stack for swap
  */
-void	swap(t_list *head)
+void	swap(t_list **stack, __attribute__((unused)) t_list **tmp)
 {
-	int	tmp;
+	int		temp;
+	t_list	*head;
 
-	tmp = *(int *)head->content;
+	if (!*stack || !(*stack)->next)
+		return ;
+	head = *stack;
+	temp = *(int *)head->content;
 	*(int *)head->content = *(int *)head->next->content;
-	*(int *)head->next->content = tmp;
+	*(int *)head->next->content = temp;
 }
+
 
 /**
  * @brief
@@ -41,11 +50,13 @@ void	swap(t_list *head)
  * @param src_head Pointer to the stack that need to push
  * @param dest Pointer to the stack to push into
  */
-void	push(t_list **src_head, t_list **dest)
+void	push(t_list **dest, t_list **src_head)
 {
 	t_list	*temp;
 
-	temp = *src_head;
+	if (!*src_head)
+		return ;
+	temp = *src_head; 
 	*src_head = temp->next;
 	ft_lstadd_front(dest, temp);
 }
@@ -60,7 +71,7 @@ void	push(t_list **src_head, t_list **dest)
  *
  * @param stack Pointer to the stack for operation
  */
-void	rotate(t_list **stack)
+void	rotate(t_list **stack, __attribute__((unused)) t_list **tmp)
 {
 	t_list	*temp;
 
@@ -69,6 +80,7 @@ void	rotate(t_list **stack)
 	temp->next = NULL;
 	ft_lstadd_back(stack, temp);
 }
+
 
 /**
  * @brief
@@ -80,7 +92,7 @@ void	rotate(t_list **stack)
  *
  * @param stack Pointer to the stack for operation
  */
-void	r_rotate(t_list **stack)
+void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp)
 {
 	t_list	*temp;
 	t_list	*prev;
@@ -96,25 +108,46 @@ void	r_rotate(t_list **stack)
 	free(temp);
 }
 
+
 /**
  * @brief
  * *Menu for the push_swap functions
- * still thinking what better way i can do this
+ * By storing the 4 functions in a function pointer array and
+ * the 2 stacks in a stack_array, I can dynamicly call the functions
+ * according to the input.
+ *
+ * if input length is 2 (all except rra/rrb/rrr)
+ * func_ch is s/r/p -> 0/1/2, find the pos of input[0] in char *menu
+ *
  *
  * @param stack_a Pointer to the stack_a
  * @param stack_b Pointer to the stack_b
- * @param option The option of which function to use
+ * @param input The input, s/r/p/rr + a/b/?
  */
-void	push_swap(t_list **stack_a, t_list **stack_b, char *option)
+void	push_swap(t_list **stack_a, t_list **stack_b, char *input)
 {
-	if (!ft_strncmp(option, "sa", 2))
-		swap(*stack_a);
-	if (!ft_strncmp(option, "pa", 2))
-		push(stack_a, stack_b);
-	if (!ft_strncmp(option, "ra", 2))
-		rotate(stack_a);
-	if (!ft_strncmp(option, "rra", 3))
-		r_rotate(stack_a);
-	ft_putendl_fd(option, 1);
+	char	*menu;
+	int		func_ch;
+	int		stack_ch;
+	void	(*func_arr[4])(t_list **stack_a, t_list **stack_b);
+	t_list	**stack_arr[2];
+
+	func_arr[0] = swap;
+	func_arr[1] = rotate;
+	func_arr[2] = push;
+	func_arr[3] = r_rotate;
+	stack_arr[0] = stack_a;
+	stack_arr[1] = stack_b;
+	menu = ft_strdup("srp");
+	ft_putendl_fd(input, 1);
+	if (ft_strlen(input) == 2)
+		func_ch = ft_strchr(menu, input[0]) - &menu[0];
+	else
+		func_ch = 3;
+	stack_ch = input[ft_strlen(input) - 1] - 'a';
+	(*func_arr[func_ch])(stack_arr [stack_ch], stack_arr[(stack_ch + 1) % 2]);
+	if (stack_ch > 1)
+		(*func_arr[func_ch])(stack_arr[1], stack_arr[0]);
 	display_stacks(*stack_a, *stack_b);
+	free(menu);
 }
