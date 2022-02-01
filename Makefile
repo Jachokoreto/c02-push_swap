@@ -7,7 +7,7 @@ OBJ_DIR = ./obj
 SRC := $(shell find $(SRC_DIR) -name "*.c" -execdir basename {} \;)
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-INCLUDE = -I. -Ilibft
+INCLUDE = -Iinclude -Ilibft
 
 LIBFT = libft/libft.a
 LIB_FLAGS = -Llibft -lft

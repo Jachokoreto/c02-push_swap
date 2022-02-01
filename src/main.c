@@ -26,14 +26,11 @@ int	main(int argc, char *argv[])
 	int		i;
 
 	if (argc < 2)
-		exit_error("Run ./push_swap 5 2 3 1");
+		exit_error("Run ./push_swap 5 2 3 1 ");
 	input = ft_split(argv[1], ' ');
 	create_stacks(input, &stack_a, &stack_b);
 	display_stacks(stack_a, stack_b);
-	push_swap(&stack_a, &stack_b, "sb");
-	push_swap(&stack_a, &stack_b, "pb");
-	push_swap(&stack_a, &stack_b, "sb");
-	push_swap(&stack_a, &stack_b, "rra");
+	
 	ft_lstclear(&stack_a, &free);
 	ft_lstclear(&stack_b, &free);
 	i = -1;
