@@ -21,18 +21,16 @@
 int	main(int argc, char *argv[])
 {
 	char	**input;
-	t_list	*stack_a;
-	t_list	*stack_b;
+	t_store	store;
 	int		i;
 
 	if (argc < 2)
 		exit_error("Run ./push_swap 5 2 3 1 ");
 	input = ft_split(argv[1], ' ');
-	create_stacks(input, &stack_a, &stack_b);
-	display_stacks(stack_a, stack_b);
-	
-	ft_lstclear(&stack_a, &free);
-	ft_lstclear(&stack_b, &free);
+	init_store(input, &store);
+
+	ft_lstclear(&store.stacks[0], &free);
+	ft_lstclear(&store.stacks[1], &free);
 	i = -1;
 	while (input[++i])
 		free(input[i]);

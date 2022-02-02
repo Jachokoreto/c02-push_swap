@@ -121,20 +121,12 @@ void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp)
  * @param stack_b Pointer to the stack_b
  * @param input The input, s/r/p/rr + a/b/?
  */
-void	push_swap(t_list **stack_a, t_list **stack_b, char *input)
+void	push_swap(t_store *store, char *input)
 {
 	char	*menu;
 	int		func_ch;
 	int		stack_ch;
-	void	(*func_arr[4])(t_list **stack_a, t_list **stack_b);
-	t_list	**stack_arr[2];
 
-	func_arr[0] = swap;
-	func_arr[1] = rotate;
-	func_arr[2] = push;
-	func_arr[3] = r_rotate;
-	stack_arr[0] = stack_a;
-	stack_arr[1] = stack_b;
 	menu = ft_strdup("srp");
 	ft_putendl_fd(input, 1);
 	if (ft_strlen(input) == 2)
@@ -142,9 +134,10 @@ void	push_swap(t_list **stack_a, t_list **stack_b, char *input)
 	else
 		func_ch = 3;
 	stack_ch = input[ft_strlen(input) - 1] - 'a';
-	(*func_arr[func_ch])(stack_arr [stack_ch], stack_arr[(stack_ch + 1) % 2]);
+	store->ps_funcs[func_ch](&store->stacks[stack_ch],
+		&store->stacks[(stack_ch + 1) % 2]);
 	if (stack_ch > 1)
-		(*func_arr[func_ch])(stack_arr[1], stack_arr[0]);
-	display_stacks(*stack_a, *stack_b);
+		store->ps_funcs[func_ch](&store->stacks[1], &store->stacks[0]);
+	display_stacks(store);
 	free(menu);
 }

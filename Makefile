@@ -7,7 +7,7 @@ OBJ_DIR = ./obj
 SRC := $(shell find $(SRC_DIR) -name "*.c" -execdir basename {} \;)
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-INCLUDE = -Iinclude -Ilibft
+INCLUDE = -Iincludes -Ilibft/includes
 
 LIBFT = libft/libft.a
 LIB_FLAGS = -Llibft -lft
@@ -18,22 +18,20 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(OBJ) $(LIB_FLAGS) -o $(NAME)
 	@echo "${GREEN}Compile successful!${NC}"
 
-$(LIBFT): libft/libft.h
-	@make bonus -C libft
-
-libft/libft.h:
-	@git submodule init
-	@git submodule update
+$(LIBFT):
+	@make -C libft
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CC_FLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
+	@make clean -C libft
 	@rm -rf $(OBJ_DIR)
 	@echo "${RED}Removed all object files...${NC}"
 
 fclean: clean
+	@make fclean -C libft
 	@rm -rf $(NAME)
 	@echo "${RED}Removed $(NAME)...${NC}"
 
