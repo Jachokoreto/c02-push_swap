@@ -26,9 +26,12 @@ typedef struct s_store {
 
 	t_ps_funcs	ps_funcs[4];
 
+	char		**input;
 	int			*array;
+
 	int			input_size;
 	int			median;
+
 
 }	t_store;
 

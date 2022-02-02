@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/02 15:37:38 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/02 17:39:38 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ void	create_and_sort_array(t_store *store)
 				swap_int(&store->array[j], &store->array[j + 1]);
 		}
 	}
+	printArray(store->array, store->input_size);
+}
+
+void	set_properties(t_store *store)
+{
+	store->median = store->array[store->input_size/2];
+	ft_printf("median : %d\n", store->median);
 }
 
 
@@ -94,14 +101,15 @@ void	init_store(char **input, t_store *store)
 {
 	int	i;
 
+	store->input = input;
+	i = -1;
+	while (store->input[++i])
+		store->input_size = i + 1;
 	create_stacks(input, &store->stacks[0], &store->stacks[1]);
 	store->ps_funcs[0] = swap;
 	store->ps_funcs[1] = rotate;
 	store->ps_funcs[2] = push;
 	store->ps_funcs[3] = r_rotate;
-	i = -1;
-	while (input[++i])
-		store->input_size = i + 1;
 	create_and_sort_array(store);
-
+	set_properties(store);
 }
