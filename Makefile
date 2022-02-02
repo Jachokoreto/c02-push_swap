@@ -25,6 +25,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CC_FLAGS) $(INCLUDE) -c $< -o $@
 
+test: all
+	@echo "${GREEN}Running...${NC}"
+	./push_swap "$(shell ./GenRandNum.sh $(min) $(max) $(size) | tr '\n' ' ')"
+
+
 clean:
 	@make clean -C libft
 	@rm -rf $(OBJ_DIR)
@@ -37,7 +42,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all ARG
 
 # Colors are great!
 # Formats are greater!
