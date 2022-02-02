@@ -32,23 +32,28 @@ typedef struct s_store {
 
 }	t_store;
 
+// **** init_store.c ****
 void	init_store(char **input, t_store *store);
+void	create_stacks(char **input, t_list **stack_a, t_list **stack_b);
+void	create_and_sort_array(t_store *store);
+
+// **** push_swap.c ****
 void	push_swap(t_store *store, char *option);
-void	exit_error(char *msg);
-
-
-/**** PUSH_SWAP FUNCTIONS ****/
 void	swap(t_list **stack, __attribute__((unused)) t_list **tmp);
 void	push(t_list **dest, t_list **src_head);
 void	rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
 void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
+
+// **** exit.c ****
+void	clear_before_exit(char **input, t_store *store);
+void	exit_error(char *msg);
+
 
 /*
 I am using linked list for creating
 the stack a and stack b, these are
 the functions for it
 */
-void	create_stacks(char **input, t_list **stack_a, t_list **stack_b);
 void	display_stacks(t_store *store);
 void	display_node(void *data);
 

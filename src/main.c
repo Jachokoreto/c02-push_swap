@@ -22,18 +22,13 @@ int	main(int argc, char *argv[])
 {
 	char	**input;
 	t_store	store;
-	int		i;
 
 	if (argc < 2)
 		exit_error("Run ./push_swap 5 2 3 1 ");
 	input = ft_split(argv[1], ' ');
 	init_store(input, &store);
+	display_stacks(&store);
 
-	ft_lstclear(&store.stacks[0], &free);
-	ft_lstclear(&store.stacks[1], &free);
-	i = -1;
-	while (input[++i])
-		free(input[i]);
-	free(input);
+	clear_before_exit(input, &store);
 	return (0);
 }

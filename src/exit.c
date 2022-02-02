@@ -18,3 +18,16 @@ void	exit_error(char *msg)
 	ft_putendl_fd(msg, 1);
 	exit (1);
 }
+
+void	clear_before_exit(char **input, t_store *store)
+{
+	int		i;
+
+	ft_lstclear(&store->stacks[0], &free);
+	ft_lstclear(&store->stacks[1], &free);
+	i = -1;
+	while (input[++i])
+		free(input[i]);
+	free(input);
+	free(store->array);
+}

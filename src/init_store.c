@@ -6,11 +6,19 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/02 11:08:17 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/02 15:37:38 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
 
 /**
  * @brief Create stack a filled with int from array,
@@ -39,20 +47,48 @@ void	create_stacks(char **input, t_list **stack_a, t_list **stack_b)
 	}
 }
 
-void	create_sorted_array(t_store *store)
+void	swap_int(int *i, int *j)
+{
+	int	tmp;
+	
+	tmp = *i;
+	*i = *j;
+	*j = tmp;
+}
+
+/**
+ * @brief create and sort int array
+ * I thought of using merge or quick sort, but 
+ * for the sake of simplicity, I will just use 
+ * bubble sort.
+ */
+void	create_and_sort_array(t_store *store)
 {
 	t_list	*tmp;
 	int		i;
+	int		j;
 
 	tmp = store->stacks[0];
 	store->array = malloc(sizeof(int) * store->input_size);
 	i = -1;
-	while (tmp->next)
+	while (tmp && tmp->content)
 	{
-		store->array[++i] = tmp->content;
+		store->array[++i] = *(int *)tmp->content;
 		tmp = tmp->next;
 	}
+	i = -1;
+	while (++i < store->input_size)
+	{
+		j = -1;
+		while (++j < store->input_size - i - 1)
+		{
+			if (store->array[j] > store->array[j + 1])
+				swap_int(&store->array[j], &store->array[j + 1]);
+		}
+	}
 }
+
+
 
 void	init_store(char **input, t_store *store)
 {
@@ -66,4 +102,6 @@ void	init_store(char **input, t_store *store)
 	i = -1;
 	while (input[++i])
 		store->input_size = i + 1;
+	create_and_sort_array(store);
+
 }
