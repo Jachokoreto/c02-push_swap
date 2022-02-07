@@ -6,19 +6,11 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/02 17:39:38 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/07 01:38:50 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
 
 /**
  * @brief Create stack a filled with int from array,
@@ -50,7 +42,7 @@ void	create_stacks(char **input, t_list **stack_a, t_list **stack_b)
 void	swap_int(int *i, int *j)
 {
 	int	tmp;
-	
+
 	tmp = *i;
 	*i = *j;
 	*j = tmp;
@@ -58,8 +50,8 @@ void	swap_int(int *i, int *j)
 
 /**
  * @brief create and sort int array
- * I thought of using merge or quick sort, but 
- * for the sake of simplicity, I will just use 
+ * I thought of using merge or quick sort, but
+ * for the sake of simplicity, I will just use
  * bubble sort.
  */
 void	create_and_sort_array(t_store *store)
@@ -89,17 +81,10 @@ void	create_and_sort_array(t_store *store)
 	printArray(store->array, store->input_size);
 }
 
-void	set_properties(t_store *store)
-{
-	store->median = store->array[store->input_size/2];
-	ft_printf("median : %d\n", store->median);
-}
-
-
-
 void	init_store(char **input, t_store *store)
 {
 	int	i;
+	int	tmp;
 
 	store->input = input;
 	i = -1;
@@ -111,5 +96,12 @@ void	init_store(char **input, t_store *store)
 	store->ps_funcs[2] = push;
 	store->ps_funcs[3] = r_rotate;
 	create_and_sort_array(store);
-	set_properties(store);
+	if (store->input_size >= 50)
+		tmp = 50;
+	else
+		tmp = store->input_size;
+	store->to_split = store->input_size / tmp;
+	store->split_size = ((store->input_size % tmp) / store->to_split)
+		+ store->input_size / store->to_split;
+
 }

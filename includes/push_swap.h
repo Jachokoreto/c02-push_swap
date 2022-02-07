@@ -30,6 +30,8 @@ typedef struct s_store {
 	int			*array;
 
 	int			input_size;
+	int			to_split;
+	int			split_size;
 	int			median;
 
 
@@ -47,6 +49,10 @@ void	push(t_list **dest, t_list **src_head);
 void	rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
 void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
 
+void	sort_stack(t_store *store);
+
+
+
 // **** exit.c ****
 void	clear_before_exit(char **input, t_store *store);
 void	exit_error(char *msg);
@@ -59,5 +65,8 @@ the functions for it
 */
 void	display_stacks(t_store *store);
 void	display_node(void *data);
+
+void printArray(int arr[], int size);
+
 
 #endif

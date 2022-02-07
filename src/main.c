@@ -28,6 +28,7 @@ int	main(int argc, char *argv[])
 	input = ft_split(argv[1], ' ');
 	init_store(input, &store);
 	display_stacks(&store);
+	sort_stack(&store);
 
 	clear_before_exit(input, &store);
 	return (0);

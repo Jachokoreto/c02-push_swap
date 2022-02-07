@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/02 12:35:59 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/07 01:40:34 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,43 @@
  * 3. determine the closest one
  * 4. take steps to move the closest one for pushing back to stack a
  *
+ * how do i split the array?
+ *
  */
 
 
-
-
-
-void	sort_stack(void)
+void	push_a_to_b(t_store *store)
 {
-	
+	int	i;
+	int	moved;
+	int	min;
+	int	max;
+
+	i = -1;
+	while (++i < store->to_split)
+	{
+		moved = 0;
+		min = store->array[store->split_size * i];
+		max = store->array[min + store->split_size];
+		while (moved <= store->split_size)
+		{
+			if (*(int *)store->stacks[0]->content >= min
+				&& *(int *)store->stacks[0]->content <= max)
+			{
+				push_swap(store, "pb");
+				moved++;
+			}
+			else
+				push_swap(store, "ra");
+		}
+
+	}
+
+}
+
+
+void	sort_stack(t_store *store)
+{
+	push_a_to_b(store);
 }
 
