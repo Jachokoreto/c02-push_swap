@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 16:58:01 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/07 19:18:46 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	push_a_to_b(t_store *store)
 				moved++;
 			}
 			else
+			{
 				push_swap(store, "ra");
+			}
 		}
 
 	}
@@ -107,8 +109,5 @@ void	sort_stack(t_store *store)
 {
 	push_a_to_b(store);
 	push_b_to_a(store);
-	printf("\033[1;31m");
-	// while (*(int *)store->stacks[0]->content != store->array[0])
-	// 	push_swap(store, "ra");
 }
 

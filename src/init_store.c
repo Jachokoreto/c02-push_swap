@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 16:42:22 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/07 19:13:01 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,17 @@ void	create_and_sort_array(t_store *store)
 				swap_int(&store->array[j], &store->array[j + 1]);
 		}
 	}
-	printArray(store->array, store->input_size);
 }
 
-void	init_store(char **input, t_store *store)
+void	init_store(t_store *store)
 {
 	int	i;
 	int	tmp;
 
-	store->input = input;
 	i = -1;
 	while (store->input[++i])
 		store->input_size = i + 1;
-	create_stacks(input, &store->stacks[0], &store->stacks[1]);
+	create_stacks(store->input, &store->stacks[0], &store->stacks[1]);
 	store->ps_funcs[0] = swap;
 	store->ps_funcs[1] = rotate;
 	store->ps_funcs[2] = push;
@@ -103,5 +101,4 @@ void	init_store(char **input, t_store *store)
 	store->to_split = store->input_size / tmp;
 	store->split_size = ((store->input_size % tmp) / store->to_split)
 		+ store->input_size / store->to_split;
-
 }
