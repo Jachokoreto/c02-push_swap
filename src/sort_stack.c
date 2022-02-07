@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 01:40:34 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/07 16:58:01 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	push_a_to_b(t_store *store)
 	{
 		moved = 0;
 		min = store->array[store->split_size * i];
-		max = store->array[min + store->split_size];
-		while (moved <= store->split_size)
+		max = store->array[store->split_size * i + store->split_size - 1];
+		while (moved < store->split_size)
 		{
 			if (*(int *)store->stacks[0]->content >= min
 				&& *(int *)store->stacks[0]->content <= max)
@@ -57,9 +57,58 @@ void	push_a_to_b(t_store *store)
 
 }
 
+void	find_top_and_bottom(t_store *store, int num)
+{
+	t_list *tmp = store->stacks[1];
+	store->from_top = 0;
+	store->from_bottom = 0;
+
+	while (tmp && *(int *)tmp->content != num)
+	{
+		tmp = tmp->next;
+		store->from_top++;
+	}
+	while (tmp)
+	{
+		tmp = tmp->next;
+		store->from_bottom++;
+	}
+}
+
+void	push_b_to_a(t_store *store)
+{
+	int		i;
+	int		moved;
+	int		move_idx;
+
+	i = -1;
+	while (++i < store->to_split)
+	{
+		moved = 0;
+		while (moved < store->split_size)
+		{
+			move_idx = store->input_size - moved - (store->split_size * i) - 1;
+			find_top_and_bottom(store, store->array[move_idx]);
+			while (*(int *)store->stacks[1]->content != store->array[move_idx])
+			{
+				if (store->from_top >= store->from_bottom)
+					push_swap(store, "rrb");
+				else
+					push_swap(store, "rb");
+			}
+			push_swap(store, "pa");
+			moved++;
+		}
+	}
+
+}
 
 void	sort_stack(t_store *store)
 {
 	push_a_to_b(store);
+	push_b_to_a(store);
+	printf("\033[1;31m");
+	// while (*(int *)store->stacks[0]->content != store->array[0])
+	// 	push_swap(store, "ra");
 }
 

@@ -22,7 +22,7 @@ void	display_stacks(t_store *store)
 {
 	char	*formatted_res;
 
-	printf("\e[1;1H\e[2J");
+	// printf("\e[1;1H\e[2J");
 	printf("\033[0;34m=== STACK A ===\033[0m");
 	// ft_lstiter(stack_a, &display_node);
 	printf("\033[0;35m === STACK B ===\033[0m\n");

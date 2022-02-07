@@ -138,6 +138,6 @@ void	push_swap(t_store *store, char *input)
 		&store->stacks[(stack_ch + 1) % 2]);
 	if (stack_ch > 1)
 		store->ps_funcs[func_ch](&store->stacks[1], &store->stacks[0]);
-	display_stacks(store);
+	// display_stacks(store);
 	free(menu);
 }

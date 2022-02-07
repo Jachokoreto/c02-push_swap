@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 01:38:50 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/07 16:42:22 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	init_store(char **input, t_store *store)
 	store->ps_funcs[2] = push;
 	store->ps_funcs[3] = r_rotate;
 	create_and_sort_array(store);
-	if (store->input_size >= 50)
-		tmp = 50;
+	if (store->input_size >= 20)
+		tmp = 20;
 	else
 		tmp = store->input_size;
 	store->to_split = store->input_size / tmp;
