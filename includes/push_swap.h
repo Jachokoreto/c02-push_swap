@@ -32,6 +32,7 @@ typedef struct s_store {
 	int			input_size;
 	int			to_split;
 	int			split_size;
+	int			last_split_size;
 	int			median;
 	int			from_top;
 	int			from_bottom;

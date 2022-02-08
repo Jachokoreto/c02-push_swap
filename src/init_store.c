@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 19:13:01 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/08 14:53:27 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	create_and_sort_array(t_store *store)
 void	init_store(t_store *store)
 {
 	int	i;
-	int	tmp;
 
 	i = -1;
 	while (store->input[++i])
@@ -95,10 +94,14 @@ void	init_store(t_store *store)
 	store->ps_funcs[3] = r_rotate;
 	create_and_sort_array(store);
 	if (store->input_size >= 20)
-		tmp = 20;
+		store->split_size = 20;
 	else
-		tmp = store->input_size;
-	store->to_split = store->input_size / tmp;
-	store->split_size = ((store->input_size % tmp) / store->to_split)
-		+ store->input_size / store->to_split;
+		store->split_size = store->input_size;
+	store->to_split = store->input_size / store->split_size;
+	store->last_split_size = store->input_size % store->split_size;
+	// ft_printf("input_size: %d\n", store->input_size);
+	// ft_printf("to_split: %d\n", store->to_split);
+	// ft_printf("split_size: %d\n", store->split_size);
+	// ft_printf("last array: %d\n", store->split_size * 1 + store->split_size - 1);	
+
 }

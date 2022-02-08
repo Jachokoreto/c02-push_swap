@@ -26,6 +26,8 @@ int	main(int argc, char *argv[])
 		exit_error("Run ./push_swap 5 2 3 1 ");
 	parse_input(argv, &store);
 	init_store(&store);
+	// ft_printf("======init done!=====\n");
+	// display_stacks(&store);
 	sort_stack(&store);
 	// display_stacks(&store);
 	clear_before_exit(&store);

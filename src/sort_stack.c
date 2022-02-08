@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 19:18:46 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/08 14:53:15 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,59 @@
  *
  */
 
-
-void	push_a_to_b(t_store *store)
+void	split_stack(t_store *store, int i, int split_size)
 {
-	int	i;
 	int	moved;
 	int	min;
 	int	max;
 
+	moved = 0;
+	min = store->array[store->split_size * i];
+	max = store->array[store->split_size * i + split_size - 1];
+	while (moved < split_size)
+	{
+		if (*(int *)store->stacks[0]->content >= min
+			&& *(int *)store->stacks[0]->content <= max)
+		{
+			push_swap(store, "pb");
+			moved++;
+		}
+		else
+			push_swap(store, "ra");
+	}
+}
+
+void	push_a_to_b(t_store *store)
+{
+	int	i;
+	// int	moved;
+	// int	min;
+	// int	max;
+	
+
 	i = -1;
 	while (++i < store->to_split)
 	{
-		moved = 0;
-		min = store->array[store->split_size * i];
-		max = store->array[store->split_size * i + store->split_size - 1];
-		while (moved < store->split_size)
-		{
-			if (*(int *)store->stacks[0]->content >= min
-				&& *(int *)store->stacks[0]->content <= max)
-			{
-				push_swap(store, "pb");
-				moved++;
-			}
-			else
-			{
-				push_swap(store, "ra");
-			}
-		}
-
+		// moved = 0;
+		// min = store->array[store->split_size * i];
+		// max = store->array[store->split_size * i + store->split_size - 1];
+		// while (moved < store->split_size 
+		// 	&& (moved * i) + moved < store->input_size)
+		// {
+		// 	if (*(int *)store->stacks[0]->content >= min
+		// 		&& *(int *)store->stacks[0]->content <= max)
+		// 	{
+		// 		push_swap(store, "pb");
+		// 		moved++;
+		// 	}
+		// 	else
+		// 		push_swap(store, "ra");
+		// }
+		split_stack(store, i, store->split_size);
 	}
+	// ft_printf("\033[0;35m");
+	if (store->last_split_size > 0)
+		split_stack(store, i, store->last_split_size);
 
 }
 
@@ -83,16 +107,19 @@ void	push_b_to_a(t_store *store)
 	int		moved;
 	int		move_idx;
 
+	if (store->last_split_size > 0)
+		store->to_split++;
 	i = -1;
 	while (++i < store->to_split)
 	{
 		moved = 0;
-		while (moved < store->split_size)
+		while (store->stacks[1] && moved < store->split_size)
 		{
 			move_idx = store->input_size - moved - (store->split_size * i) - 1;
 			find_top_and_bottom(store, store->array[move_idx]);
 			while (*(int *)store->stacks[1]->content != store->array[move_idx])
 			{
+				// ft_printf("interation: %d, %d ", *(int *)store->stacks[1]->content, store->array[move_idx]);
 				if (store->from_top >= store->from_bottom)
 					push_swap(store, "rrb");
 				else
@@ -108,6 +135,8 @@ void	push_b_to_a(t_store *store)
 void	sort_stack(t_store *store)
 {
 	push_a_to_b(store);
+	// ft_printf("===== push a to b done =====\n");
 	push_b_to_a(store);
+	// ft_printf("===== push b to a done =====\n");
 }
 
