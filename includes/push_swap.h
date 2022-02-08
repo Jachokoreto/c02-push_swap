@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
+// define push_swap functions
 typedef void	(*t_ps_funcs)(t_list **stack_a, t_list **stack_b);
 
 
@@ -28,6 +29,8 @@ typedef struct s_store {
 
 	char		**input;
 	int			*array;
+
+	int			is_sorted;
 
 	int			input_size;
 	int			to_split;
@@ -64,6 +67,7 @@ void	find_top_and_bottom(t_store *store, int num);
 void	clear_before_exit(t_store *store);
 void	exit_error(char *msg);
 void	parse_input(char **arg, t_store *store);
+void	check_input(t_store *store);
 
 
 

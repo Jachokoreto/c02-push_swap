@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/08 15:10:09 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/08 17:21:54 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	create_and_sort_array(t_store *store)
 		{
 			if (store->array[j] > store->array[j + 1])
 				swap_int(&store->array[j], &store->array[j + 1]);
+			if (store->array[j] == store->array[j + 1])
+				exit_error("Input have duplicates");
 		}
 	}
 }

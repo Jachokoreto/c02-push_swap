@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/08 15:43:58 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/08 17:55:08 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,23 @@
 /**
  * @brief Driver function to sort the stack.
  */
- void	sort_stack(t_store *store)
+void	sort_stack(t_store *store)
 {
-	push_a_to_b(store);
-	push_b_to_a(store);
+	int	i;
+
+	if (store->input_size > 5)
+	{
+		push_a_to_b(store);
+		push_b_to_a(store);
+		return ;
+	}
+	i = 0;
+	while (store->input_size - ++i > 3)
+		push_swap(store, "pb");
+	if (store->stacks[1])
+	{
+		
+	}
 }
 
 /**
@@ -114,10 +127,11 @@ void	push_b_to_a(t_store *store)
 
 void	find_top_and_bottom(t_store *store, int num)
 {
-	t_list *tmp = store->stacks[1];
+	t_list	*tmp;
+
+	tmp = store->stacks[1];
 	store->from_top = 0;
 	store->from_bottom = 0;
-
 	while (tmp && *(int *)tmp->content != num)
 	{
 		tmp = tmp->next;
