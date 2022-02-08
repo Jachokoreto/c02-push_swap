@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:54:55 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/08 14:53:27 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/08 15:10:09 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,4 @@ void	init_store(t_store *store)
 		store->split_size = store->input_size;
 	store->to_split = store->input_size / store->split_size;
 	store->last_split_size = store->input_size % store->split_size;
-	// ft_printf("input_size: %d\n", store->input_size);
-	// ft_printf("to_split: %d\n", store->to_split);
-	// ft_printf("split_size: %d\n", store->split_size);
-	// ft_printf("last array: %d\n", store->split_size * 1 + store->split_size - 1);	
-
 }

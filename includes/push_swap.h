@@ -56,8 +56,9 @@ void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
 // **** sort_stack.c ****
 void	sort_stack(t_store *store);
 void	push_a_to_b(t_store *store);
-void	find_top_and_bottom(t_store *store, int num);
+void	split_stack(t_store *store, int i, int split_size);
 void	push_b_to_a(t_store *store);
+void	find_top_and_bottom(t_store *store, int num);
 
 // **** util_func.c ****
 void	clear_before_exit(t_store *store);
