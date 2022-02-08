@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/08 15:10:46 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/08 15:43:58 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,23 @@
  *
  */
 
+/**
+ * @brief Driver function to sort the stack.
+ */
  void	sort_stack(t_store *store)
 {
 	push_a_to_b(store);
 	push_b_to_a(store);
 }
 
+/**
+ * @brief Split the stack according to the properties set in inti_store()
+ * TLDR: stack will be split into stacks with <=20 elements. Each split is
+ * numbers in between a certain range.
+ * the last call will happen if theres remainder from dividing 20
+ * 
+ * @param store 
+ */
 void	push_a_to_b(t_store *store)
 {
 	int	i;
@@ -66,6 +77,12 @@ void	split_stack(t_store *store, int i, int split_size)
 	}
 }
 
+/**
+ * @brief After pushing all elements to b in groups,
+ * For each groups, I will find the biggest number and calculate 
+ * the required steps to reach from bottom and from top, then take 
+ * rotate in the lesser direction, then push it back to a.
+ */
 void	push_b_to_a(t_store *store)
 {
 	int		i;
