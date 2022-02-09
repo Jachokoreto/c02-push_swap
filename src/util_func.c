@@ -50,6 +50,7 @@ void	parse_input(char **argv, t_store *store)
 		free(tmp2);
 	}
 	store->input = ft_split(tmp, ' ');
+	free(tmp);
 	check_input(store);
 }
 
@@ -59,7 +60,8 @@ void	parse_input(char **argv, t_store *store)
  * - arguments is not int
  * - arguments is not in int range
  * - duplicates in arguments(this check is done while sorting array)
- * Will also check if the input is already sorted, by comparing the current and next number
+ * Will also check if the input is already sorted,
+ * by comparing the current and next number
  */
 void	check_input(t_store *store)
 {

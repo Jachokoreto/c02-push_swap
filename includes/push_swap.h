@@ -43,6 +43,12 @@ typedef struct s_store {
 
 }	t_store;
 
+// **** util_func.c ****
+void	clear_before_exit(t_store *store);
+void	exit_error(char *msg);
+void	parse_input(char **arg, t_store *store);
+void	check_input(t_store *store);
+
 // **** init_store.c ****
 void	init_store(t_store *store);
 void	create_stacks(char **input, t_list **stack_a, t_list **stack_b);
@@ -59,17 +65,8 @@ void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
 // **** sort_stack.c ****
 void	sort_stack(t_store *store);
 void	push_a_to_b(t_store *store);
-void	split_stack(t_store *store, int i, int split_size);
 void	push_b_to_a(t_store *store);
 void	find_top_and_bottom(t_store *store, int num);
-
-// **** util_func.c ****
-void	clear_before_exit(t_store *store);
-void	exit_error(char *msg);
-void	parse_input(char **arg, t_store *store);
-void	check_input(t_store *store);
-
-
 
 /*
 I am using linked list for creating

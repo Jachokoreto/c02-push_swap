@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/08 17:55:08 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/09 09:44:16 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,28 @@
  */
 void	sort_stack(t_store *store)
 {
-	int	i;
-
 	if (store->input_size > 5)
 	{
 		push_a_to_b(store);
 		push_b_to_a(store);
 		return ;
 	}
+}
+
+void	small_sort(t_store *store)
+{
+	int	i;
+
 	i = 0;
 	while (store->input_size - ++i > 3)
 		push_swap(store, "pb");
-	if (store->stacks[1])
+	i = -1;
+	while (++i < 3)
 	{
-		
+		if (*(int *)store->stacks[0]->content
+			> *(int *)store->stacks[0]->next->content)
+			push_swap(store, "sa");
+		push_swap(store, "ra");
 	}
 }
 
@@ -54,46 +62,39 @@ void	sort_stack(t_store *store)
  * TLDR: stack will be split into stacks with <=20 elements. Each split is
  * numbers in between a certain range.
  * the last call will happen if theres remainder from dividing 20
- * 
- * @param store 
  */
-void	push_a_to_b(t_store *store)
+void	push_a_to_b(t_store *s)
 {
 	int	i;
-
-	i = -1;
-	while (++i < store->to_split)
-		split_stack(store, i, store->split_size);
-	if (store->last_split_size > 0)
-		split_stack(store, i, store->last_split_size);
-}
-
-void	split_stack(t_store *store, int i, int split_size)
-{
 	int	moved;
-	int	min;
-	int	max;
+	int	split_size;
 
-	moved = 0;
-	min = store->array[store->split_size * i];
-	max = store->array[store->split_size * i + split_size - 1];
-	while (moved < split_size)
+	split_size = s->split_size;
+	i = -1;
+	while (++i < s->to_split)
 	{
-		if (*(int *)store->stacks[0]->content >= min
-			&& *(int *)store->stacks[0]->content <= max)
+		if (i + 1 == s->to_split && s->last_split_size > 0)
+			split_size = s->last_split_size;
+		moved = 0;
+		while (moved < split_size)
 		{
-			push_swap(store, "pb");
-			moved++;
+			if (*(int *)s->stacks[0]->content >= s->array[s->split_size * i]
+				&& *(int *)s->stacks[0]->content
+				<= s->array[s->split_size * i + split_size - 1])
+			{
+				push_swap(s, "pb");
+				moved++;
+			}
+			else
+				push_swap(s, "ra");
 		}
-		else
-			push_swap(store, "ra");
 	}
 }
 
 /**
  * @brief After pushing all elements to b in groups,
- * For each groups, I will find the biggest number and calculate 
- * the required steps to reach from bottom and from top, then take 
+ * For each groups, I will find the biggest number and calculate
+ * the required steps to reach from bottom and from top, then take
  * rotate in the lesser direction, then push it back to a.
  */
 void	push_b_to_a(t_store *store)
@@ -102,8 +103,6 @@ void	push_b_to_a(t_store *store)
 	int		moved;
 	int		move_idx;
 
-	if (store->last_split_size > 0)
-		store->to_split++;
 	i = -1;
 	while (++i < store->to_split)
 	{
