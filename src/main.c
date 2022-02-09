@@ -28,6 +28,7 @@ int	main(int argc, char *argv[])
 	init_store(&store);
 	if (store.is_sorted != 1)
 		sort_stack(&store);
+	display_stacks(&store);
 	clear_before_exit(&store);
 	return (0);
 }

@@ -12,10 +12,9 @@
 
 #include "push_swap.h"
 
-void	exit_error(char *msg)
+void	exit_error(__attribute__((unused)) char *msg)
 {
 	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(msg, 2);
 	exit (1);
 }
 
@@ -84,9 +83,9 @@ void	check_input(t_store *store)
 		tmp = ft_itoa(ft_atoi(store->input[i]));
 		if (ft_strncmp(store->input[i], tmp, ft_strlen(tmp)))
 			exit_error("Input bigger/smaller than int");
-		if (store->input[i + 1] && ft_atoi(store->input[i]) > ft_atoi(store->input[i + 1]))
+		if (store->input[i + 1]
+			&& ft_atoi(store->input[i]) > ft_atoi(store->input[i + 1]))
 			store->is_sorted = 0;
 		free(tmp);
 	}
 }
-

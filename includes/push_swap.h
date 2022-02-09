@@ -37,6 +37,8 @@ typedef struct s_store {
 	int			split_size;
 	int			last_split_size;
 	int			median;
+
+	int			s_array[3];
 	int			from_top;
 	int			from_bottom;
 
@@ -64,9 +66,13 @@ void	r_rotate(t_list **stack, __attribute__((unused)) t_list **tmp);
 
 // **** sort_stack.c ****
 void	sort_stack(t_store *store);
+void	small_sort(t_store *store);
 void	push_a_to_b(t_store *store);
 void	push_b_to_a(t_store *store);
-void	find_top_and_bottom(t_store *store, int num);
+
+// **** sort_stack_utils.c ****
+void	find_from_top_and_from_bottom(t_store *store, int num);
+int		*compare_elements_and_find_pos(t_store *store);
 
 /*
 I am using linked list for creating
