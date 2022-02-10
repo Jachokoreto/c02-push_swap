@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/09 16:18:57 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/10 12:22:12 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	sort_stack(t_store *store)
 void	small_sort(t_store *s)
 {
 	int		*num;
+	int		move_to;
 	int		i;
+	int		size;
 
 	while (1)
 	{
@@ -63,14 +65,23 @@ void	small_sort(t_store *s)
 		else
 			push_swap(s, "sa");
 	}
+	size = 3;
+	display_stacks(s);
+
 	while (s->stacks[1])
 	{
+		move_to = 0;
+		while (*(int *)s->stacks[1]->content != s->array[move_to++])
+		if (move_to >= s->input_size)
+			move_to = s->input_size - 1;
+		ft_printf("%d, %d\n", move_to, s->input_size);
 		i = -1;
-		while (*(int *)s->stacks[0]->content < *(int *)s->stacks[1]->content
-			&& ++i < 3)
+		while (*(int *)s->stacks[0]->content != s->array[move_to] && ++i < size)
 			push_swap(s, "ra");
 		push_swap(s, "pa");
+		size++;
 	}
+	display_stacks(s);
 	while (*(int *)s->stacks[0]->content != s->array[0])
 		push_swap(s, "rra");
 }
