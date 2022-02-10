@@ -71,8 +71,8 @@ void	push_a_to_b(t_store *store);
 void	push_b_to_a(t_store *store);
 
 // **** sort_stack_utils.c ****
-void	find_from_top_and_from_bottom(t_store *store, int num);
-int		*compare_elements_and_find_pos(t_store *store);
+void	find_from_top_and_from_bottom(t_store *store, int num, int stack_ch);
+int		*get_stack_content(t_store *store);
 
 /*
 I am using linked list for creating

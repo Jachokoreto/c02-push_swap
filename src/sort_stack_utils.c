@@ -6,17 +6,17 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:28:20 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/09 15:12:09 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/10 18:51:46 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	find_from_top_and_from_bottom(t_store *store, int num)
+void	find_from_top_and_from_bottom(t_store *store, int num, int stack_ch)
 {
 	t_list	*tmp;
 
-	tmp = store->stacks[1];
+	tmp = store->stacks[stack_ch];
 	store->from_top = 0;
 	store->from_bottom = 0;
 	while (tmp && *(int *)tmp->content != num)
@@ -31,7 +31,7 @@ void	find_from_top_and_from_bottom(t_store *store, int num)
 	}
 }
 
-int	*compare_elements_and_find_pos(t_store *store)
+int	*get_stack_content(t_store *store)
 {
 	int		j;
 	int		i;
@@ -52,4 +52,17 @@ int	*compare_elements_and_find_pos(t_store *store)
 		tmp = tmp->next;
 	}
 	return (num);
-}
+}	
+
+int	get_correct_position(t_store *store)
+{
+	int		i;
+	int		pos;
+	t_list	*tmp;
+
+	tmp = store->stacks[0];
+	i = -1;
+	while (tmp && *(int *)tmp->content != *(int *)store->stacks[1]->content)
+		pos = i;
+	while 
+ }

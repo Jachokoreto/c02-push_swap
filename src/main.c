@@ -30,5 +30,7 @@ int	main(int argc, char *argv[])
 		sort_stack(&store);
 	// display_stacks(&store);
 	clear_before_exit(&store);
+
+	store.is_sorted = 0;
 	return (0);
 }

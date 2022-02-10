@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/10 12:22:12 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/10 16:43:04 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,15 @@ void	sort_stack(t_store *store)
 	while (store->input_size - (++i) > 3)
 		push_swap(store, "pb");
 	small_sort(store);
+	while (*(int *)s->stacks[0]->content != s->array[0])
+		push_swap(s, "rra");
 }
 
+/**
+ * @brief Ironically, this small sort is more complicated than the big one.
+ * Had to make two functions for this,
+ * One for the 3 number stack and one for the 4th and 5th number.
+ */
 void	small_sort(t_store *s)
 {
 	int		*num;
@@ -55,7 +62,7 @@ void	small_sort(t_store *s)
 
 	while (1)
 	{
-		num = compare_elements_and_find_pos(s);
+		num = get_stack_content(s);
 		if (num[0] < num[1] && num[1] < num[2])
 			break ;
 		if (num[0] > num[1] && num[0] > num[2] && num[2] > num[1])
@@ -65,25 +72,20 @@ void	small_sort(t_store *s)
 		else
 			push_swap(s, "sa");
 	}
-	size = 3;
-	display_stacks(s);
-
 	while (s->stacks[1])
 	{
-		move_to = 0;
-		while (*(int *)s->stacks[1]->content != s->array[move_to++])
-		if (move_to >= s->input_size)
-			move_to = s->input_size - 1;
-		ft_printf("%d, %d\n", move_to, s->input_size);
-		i = -1;
-		while (*(int *)s->stacks[0]->content != s->array[move_to] && ++i < size)
-			push_swap(s, "ra");
-		push_swap(s, "pa");
-		size++;
+
+		// move_to = 0;
+		// while (*(int *)s->stacks[1]->content != s->array[move_to++])
+		// if (move_to >= s->input_size)
+		// 	move_to = s->input_size - 1;
+		// ft_printf("%d, %d\n", move_to, s->input_size);
+		// i = -1;
+		// while (*(int *)s->stacks[0]->content != s->array[move_to] && ++i < size)
+		// 	push_swap(s, "ra");
+		// push_swap(s, "pa");
+		// size++;
 	}
-	display_stacks(s);
-	while (*(int *)s->stacks[0]->content != s->array[0])
-		push_swap(s, "rra");
 }
 
 /**
@@ -143,7 +145,7 @@ void	push_b_to_a(t_store *store)
 		while (store->stacks[1] && moved < store->split_size)
 		{
 			move_idx = store->input_size - moved - (store->split_size * i) - 1;
-			find_from_top_and_from_bottom(store, store->array[move_idx]);
+			find_from_top_and_from_bottom(store, store->array[move_idx], 1);
 			while (*(int *)store->stacks[1]->content != store->array[move_idx])
 			{
 				if (store->from_top >= store->from_bottom)
