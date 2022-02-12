@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:28:20 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/10 18:51:46 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 08:02:49 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,36 @@ int	*get_stack_content(t_store *store)
 		tmp = tmp->next;
 	}
 	return (num);
-}	
+}
 
-int	get_correct_position(t_store *store)
+void	move_to_correct_position(t_store *store)
 {
-	int		i;
 	int		pos;
+	int		smaller_than;
 	t_list	*tmp;
 
 	tmp = store->stacks[0];
-	i = -1;
-	while (tmp && *(int *)tmp->content != *(int *)store->stacks[1]->content)
-		pos = i;
-	while 
- }
+	smaller_than = 0;
+	while (tmp)
+	{
+		if (*(int *)store->stacks[1]->content < *(int *)tmp->content)
+			smaller_than++;
+		tmp = tmp->next;
+	}
+	if (smaller_than == 0 || smaller_than )
+	else
+	{
+		while (smaller_than-- > 0)
+
+	}
+		pos = *(int *)tmp->content;
+	printf("%d\n", pos);
+	find_from_top_and_from_bottom(store, pos, 1);
+	while (*(int *)store->stacks[0]->content != pos)
+	{
+		if (store->from_top >= store->from_bottom)
+			push_swap(store, "rra");
+		else
+			push_swap(store, "ra");
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/10 16:43:04 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 00:08:08 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	sort_stack(t_store *store)
 	while (store->input_size - (++i) > 3)
 		push_swap(store, "pb");
 	small_sort(store);
-	while (*(int *)s->stacks[0]->content != s->array[0])
-		push_swap(s, "rra");
+	while (*(int *)store->stacks[0]->content != store->array[0])
+		push_swap(store, "rra");
 }
 
 /**
@@ -56,9 +56,6 @@ void	sort_stack(t_store *store)
 void	small_sort(t_store *s)
 {
 	int		*num;
-	int		move_to;
-	int		i;
-	int		size;
 
 	while (1)
 	{
@@ -71,20 +68,13 @@ void	small_sort(t_store *s)
 			push_swap(s, "rra");
 		else
 			push_swap(s, "sa");
+		free(num);
 	}
+	free(num);
 	while (s->stacks[1])
 	{
-
-		// move_to = 0;
-		// while (*(int *)s->stacks[1]->content != s->array[move_to++])
-		// if (move_to >= s->input_size)
-		// 	move_to = s->input_size - 1;
-		// ft_printf("%d, %d\n", move_to, s->input_size);
-		// i = -1;
-		// while (*(int *)s->stacks[0]->content != s->array[move_to] && ++i < size)
-		// 	push_swap(s, "ra");
-		// push_swap(s, "pa");
-		// size++;
+		move_to_correct_position(s);
+		push_swap(s, "pa");
 	}
 }
 
@@ -92,9 +82,9 @@ void	small_sort(t_store *s)
  * @brief Split the stack according to the properties set in inti_store()
  * TLDR: stack will be split into stacks with <=20 elements. Each split is
  * numbers in between a certain range.
- * On the last loop it will check if there's remainder, 
+ * On the last loop it will check if there's remainder,
  * and adjust the loop counter to remainder.
- * 
+ *
  * moved = to keep track how many elements it moved
  * split_size = loop counter to ensure it moved the correct amount for each group
  */
