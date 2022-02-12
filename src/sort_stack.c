@@ -56,7 +56,8 @@ void	sort_stack(t_store *store)
 void	small_sort(t_store *s)
 {
 	int		*num;
-
+	int		small;
+	
 	while (1)
 	{
 		num = get_stack_content(s);
@@ -71,7 +72,7 @@ void	small_sort(t_store *s)
 		free(num);
 	}
 	free(num);
-	while (s->stacks[1])
+	small = 0;
 	{
 		move_to_correct_position(s);
 		push_swap(s, "pa");
@@ -88,7 +89,7 @@ void	small_sort(t_store *s)
  * moved = to keep track how many elements it moved
  * split_size = loop counter to ensure it moved the correct amount for each group
  */
-void	push_a_to_b(t_store *s)
+oid	push_a_to_b(t_store *s)
 {
 	int	i;
 	int	moved;
