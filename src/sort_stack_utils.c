@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:28:20 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/12 08:02:49 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 16:56:57 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void	find_from_top_and_from_bottom(t_store *store, int num, int stack_ch)
 	}
 }
 
-int	*get_stack_content(t_store *store)
+int	*get_stack_content_rank(t_store *store, int stack_ch)
 {
 	int		j;
 	int		i;
 	int		*num;
 	t_list	*tmp;
 
-	num = (int *)malloc(sizeof(int) * 3);
+	num = malloc(sizeof(int) * ft_lstsize(store->stacks[stack_ch]));
 	if (!num)
 		return (NULL);
 	j = 0;
-	tmp = store->stacks[0];
+	tmp = store->stacks[stack_ch];
 	while (tmp)
 	{
 		i = -1;
@@ -54,29 +54,29 @@ int	*get_stack_content(t_store *store)
 	return (num);
 }
 
-void	move_to_correct_position(t_store *store)
+void	move_to_correct_position(t_store *store, int small)
 {
-	int		pos;
 	int		smaller_than;
 	t_list	*tmp;
+	int		*num;
+	int		pos;
 
 	tmp = store->stacks[0];
 	smaller_than = 0;
-	while (tmp)
-	{
-		if (*(int *)store->stacks[1]->content < *(int *)tmp->content)
-			smaller_than++;
-		tmp = tmp->next;
-	}
-	if (smaller_than == 0 || smaller_than )
+	num = get_stack_content_rank(store, 1);
+	if (num[0] == 0 || num[0] == store->input_size - 1)
+		pos = small;
 	else
+		pos = store->array[num[0] + 1];
+	if (store->stacks[1]->next 
+		&& *(int *)store->stacks[1]->next->content == pos)
 	{
-		while (smaller_than-- > 0)
-
+		if (num[0] + 2 < store->input_size)
+			pos = store->array[num[0] + 2];
+		else
+			pos = small;
 	}
-		pos = *(int *)tmp->content;
-	printf("%d\n", pos);
-	find_from_top_and_from_bottom(store, pos, 1);
+	find_from_top_and_from_bottom(store, pos, 0);
 	while (*(int *)store->stacks[0]->content != pos)
 	{
 		if (store->from_top >= store->from_bottom)

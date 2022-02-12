@@ -15,6 +15,7 @@
 void	exit_error(__attribute__((unused)) char *msg)
 {
 	ft_putendl_fd("Error", 2);
+	// ft_putendl_fd(msg, 2);
 	exit (1);
 }
 
@@ -73,11 +74,13 @@ void	check_input(t_store *store)
 	store->is_sorted = 1;
 	while (store->input[++i])
 	{
-		j = -1;
-		while (store->input[i][++j])
+		j = 0;
+		if (store->input[i][j] == '-')
+			j++;
+		while (store->input[i][j])
 		{
-			c = store->input[i][j];
-			if (!ft_isdigit(c) && c != '-')
+			c = store->input[i][j++];
+			if (!ft_isdigit(c))
 				exit_error("Input is not integer");
 		}
 		tmp = ft_itoa(ft_atoi(store->input[i]));

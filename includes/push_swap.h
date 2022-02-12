@@ -72,8 +72,8 @@ void	push_b_to_a(t_store *store);
 
 // **** sort_stack_utils.c ****
 void	find_from_top_and_from_bottom(t_store *store, int num, int stack_ch);
-int		*get_stack_content(t_store *store);
-void	move_to_correct_position(t_store *store);
+int		*get_stack_content_rank(t_store *store, int stack_ch);
+void	move_to_correct_position(t_store *store, int small);
 
 /*
 I am using linked list for creating
@@ -83,7 +83,8 @@ the functions for it
 void	display_stacks(t_store *store);
 void	display_node(void *data);
 
-void printArray(int arr[], int size);
+void printIntArray(int arr[], int size);
+void printStrArray(char *arr[]);
 
 
 #endif

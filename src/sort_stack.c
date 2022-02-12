@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/12 00:08:08 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 16:12:27 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	sort_stack(t_store *store)
 		push_swap(store, "pb");
 	small_sort(store);
 	while (*(int *)store->stacks[0]->content != store->array[0])
-		push_swap(store, "rra");
+		push_swap(store, "ra");
 }
 
 /**
@@ -60,7 +60,7 @@ void	small_sort(t_store *s)
 	
 	while (1)
 	{
-		num = get_stack_content(s);
+		num = get_stack_content_rank(s, 0);
 		if (num[0] < num[1] && num[1] < num[2])
 			break ;
 		if (num[0] > num[1] && num[0] > num[2] && num[2] > num[1])
@@ -72,10 +72,13 @@ void	small_sort(t_store *s)
 		free(num);
 	}
 	free(num);
-	small = 0;
+	small = *(int *)s->stacks[0]->content;
+	while (s->stacks[1])
 	{
-		move_to_correct_position(s);
+		move_to_correct_position(s, small);
 		push_swap(s, "pa");
+		if (*(int *)s->stacks[0]->content < small)
+			small = *(int *)s->stacks[0]->content;
 	}
 }
 
@@ -89,7 +92,7 @@ void	small_sort(t_store *s)
  * moved = to keep track how many elements it moved
  * split_size = loop counter to ensure it moved the correct amount for each group
  */
-oid	push_a_to_b(t_store *s)
+void	push_a_to_b(t_store *s)
 {
 	int	i;
 	int	moved;

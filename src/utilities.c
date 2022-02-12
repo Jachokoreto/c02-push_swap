@@ -6,14 +6,14 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 23:07:45 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/07 18:37:18 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 16:37:47 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "push_swap.h"
 
-void printArray(int arr[], int size)
+void printIntArray(int arr[], int size)
 {
     int i;
 
@@ -21,6 +21,16 @@ void printArray(int arr[], int size)
         printf("%d ", arr[i]);
     printf("\n");
 }
+
+void printStrArray(char *arr[])
+{
+    int i;
+
+	i = -1;
+    while (arr[++i])
+        ft_putendl_fd(arr[i], 1);
+}
+
 
 char	*format_node(t_list *stack_a, t_list *stack_b);
 
