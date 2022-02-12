@@ -27,7 +27,7 @@ test: $(NAME) bonus
 	@$(CC) test.c -L. -lft && ./a.out
 
 clean:
-	@rm -f *.o
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@rm -f $(NAME)
