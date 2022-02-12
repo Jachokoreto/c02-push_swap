@@ -1,6 +1,6 @@
 NAME = libft.a
 
-CC = gcc -Wall -Werror -Wextra
+CC = gcc -Wall -Werror -Wextra -fsanitize=address -g3
 
 SRC_DIR = ./srcs
 OBJ_DIR = ./obj

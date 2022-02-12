@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:28:20 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/12 16:56:57 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 18:09:31 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,15 @@ int	*get_stack_content_rank(t_store *store, int stack_ch)
 
 void	move_to_correct_position(t_store *store, int small)
 {
-	int		smaller_than;
-	t_list	*tmp;
 	int		*num;
 	int		pos;
 
-	tmp = store->stacks[0];
-	smaller_than = 0;
 	num = get_stack_content_rank(store, 1);
 	if (num[0] == 0 || num[0] == store->input_size - 1)
 		pos = small;
 	else
 		pos = store->array[num[0] + 1];
-	if (store->stacks[1]->next 
+	if (store->stacks[1]->next
 		&& *(int *)store->stacks[1]->next->content == pos)
 	{
 		if (num[0] + 2 < store->input_size)
@@ -84,4 +80,5 @@ void	move_to_correct_position(t_store *store, int small)
 		else
 			push_swap(store, "ra");
 	}
+	free(num);
 }

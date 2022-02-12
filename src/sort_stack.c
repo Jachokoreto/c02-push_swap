@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/12 16:12:27 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/12 17:55:56 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	small_sort(t_store *s)
 {
 	int		*num;
 	int		small;
-	
+
 	while (1)
 	{
 		num = get_stack_content_rank(s, 0);
