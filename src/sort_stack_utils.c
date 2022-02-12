@@ -6,12 +6,23 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:28:20 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/12 18:09:31 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/13 01:17:53 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/**
+ * @brief
+ * Find how many steps to reach target from top and from bottom.
+ * Go thru the linked list and increment from_top
+ * until finding the target int, then go thru the linked list and
+ * increment from_bottom until reaching the end.
+ *
+ * @param store
+ * @param num The target integer
+ * @param stack_ch Which stack to look in
+ */
 void	find_from_top_and_from_bottom(t_store *store, int num, int stack_ch)
 {
 	t_list	*tmp;
@@ -31,6 +42,17 @@ void	find_from_top_and_from_bottom(t_store *store, int num, int stack_ch)
 	}
 }
 
+/**
+ * @brief
+ * This is for the small sort.
+ * It calculates the ranking/placing of each element
+ * in the stack by comparing the element with the sorted
+ * array in store.
+ *
+ * @param store
+ * @param stack_ch
+ * @return int* an array of int corresponding to elements
+ */
 int	*get_stack_content_rank(t_store *store, int stack_ch)
 {
 	int		j;
@@ -54,6 +76,18 @@ int	*get_stack_content_rank(t_store *store, int stack_ch)
 	return (num);
 }
 
+/**
+ * @brief
+ * Make necessary rotations before pushing elements from b to a
+ * If the element in stack b is biggest or the smallest number,
+ * rotate to the smallest element in stack a
+ * else rotate to the element thats after element b.
+ * But if the next element is not available, will either
+ * rotate to the one after or to the smallest element
+ *
+ * @param store
+ * @param small the smallest element in stack a
+ */
 void	move_to_correct_position(t_store *store, int small)
 {
 	int		*num;

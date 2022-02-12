@@ -33,12 +33,10 @@ typedef struct s_store {
 	int			is_sorted;
 
 	int			input_size;
-	int			to_split;
+	int			split_count;
 	int			split_size;
 	int			last_split_size;
-	int			median;
 
-	int			s_array[3];
 	int			from_top;
 	int			from_bottom;
 
@@ -48,7 +46,7 @@ typedef struct s_store {
 // **** util_func.c ****
 void	clear_before_exit(t_store *store);
 void	exit_error(char *msg);
-void	parse_input(char **arg, t_store *store);
+void	parse_and_check_input(char **arg, t_store *store);
 void	check_input(t_store *store);
 
 // **** init_store.c ****
@@ -83,8 +81,8 @@ the functions for it
 void	display_stacks(t_store *store);
 void	display_node(void *data);
 
-void printIntArray(int arr[], int size);
-void printStrArray(char *arr[]);
+void 	printIntArray(int arr[], int size);
+void 	printStrArray(char *arr[]);
 
 
 #endif

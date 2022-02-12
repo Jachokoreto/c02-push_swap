@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 12:52:07 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/12 17:55:56 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/13 01:27:54 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@
  */
 
 /**
- * @brief Driver function to sort the stack.
+ * @brief
+ * Driver function to sort the stack.
+ *
+ * Will run the usual sort when there's more than 5 elements.
+ * If not, will run the small sort and rotate it to make sure
+ * the smallest is at the top.
  */
 void	sort_stack(t_store *store)
 {
@@ -52,6 +57,10 @@ void	sort_stack(t_store *store)
  * @brief Ironically, this small sort is more complicated than the big one.
  * Had to make two functions for this,
  * One for the 3 number stack and one for the 4th and 5th number.
+ *
+ * Sort the elements in stack_a first following the possible 5 cases method.
+ * Then if theres elements in stack_b, rotate stack_a to correct position
+ * and push elements from b to a, while keep tracking the smallest element too.
  */
 void	small_sort(t_store *s)
 {
@@ -85,12 +94,11 @@ void	small_sort(t_store *s)
 /**
  * @brief Split the stack according to the properties set in inti_store()
  * TLDR: stack will be split into stacks with <=20 elements. Each split is
- * numbers in between a certain range.
- * On the last loop it will check if there's remainder,
- * and adjust the loop counter to remainder.
+ * numbers in between a certain range. On the last loop it will check if
+ * there's remainder, and adjust the loop counter to remainder.
  *
- * moved = to keep track how many elements it moved
- * split_size = loop counter to ensure it moved the correct amount for each group
+ * moved:		to keep track how many elements it moved
+ * split_size:	loop counter to ensure it moved the correct amount for each group
  */
 void	push_a_to_b(t_store *s)
 {
@@ -100,9 +108,9 @@ void	push_a_to_b(t_store *s)
 
 	split_size = s->split_size;
 	i = -1;
-	while (++i < s->to_split)
+	while (++i < s->split_count)
 	{
-		if (i + 1 == s->to_split && s->last_split_size > 0)
+		if (i + 1 == s->split_count && s->last_split_size > 0)
 			split_size = s->last_split_size;
 		moved = 0;
 		while (moved < split_size)
@@ -122,9 +130,14 @@ void	push_a_to_b(t_store *s)
 
 /**
  * @brief After pushing all elements to b in groups,
- * For each groups, I will find the biggest number and calculate
- * the required steps to reach from bottom and from top, then take
+ * For each groups, it will find the biggest number and calculate
+ * the required steps to reach from bottom and from top, then
  * rotate in the lesser direction, then push it back to a.
+ *
+ * moved:		keep track how many elements has moved
+ * move_idx:	the target element, current biggest in group
+ * 				- calculate by offsetting moved elements and current
+ * 				split group from the descending order
  */
 void	push_b_to_a(t_store *store)
 {
@@ -133,7 +146,7 @@ void	push_b_to_a(t_store *store)
 	int		move_idx;
 
 	i = -1;
-	while (++i < store->to_split)
+	while (++i < store->split_count)
 	{
 		moved = 0;
 		while (store->stacks[1] && moved < store->split_size)

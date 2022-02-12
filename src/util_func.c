@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief
+ * Just exit error, to be use during setting up.
+ *
+ */
 void	exit_error(__attribute__((unused)) char *msg)
 {
 	ft_putendl_fd("Error", 2);
@@ -31,7 +36,7 @@ void	clear_before_exit(t_store *store)
 	free(store->array);
 }
 
-void	parse_input(char **argv, t_store *store)
+void	parse_and_check_input(char **argv, t_store *store)
 {
 	int		i;
 	char	*tmp;
@@ -54,7 +59,8 @@ void	parse_input(char **argv, t_store *store)
 }
 
 /**
- * @brief Check input for errors
+ * @brief
+ * Check input for errors
  * Errors :
  * - arguments is not int
  * - arguments is not in int range
