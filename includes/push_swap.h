@@ -21,7 +21,6 @@
 // define push_swap functions
 typedef void	(*t_ps_funcs)(t_list **stack_a, t_list **stack_b);
 
-
 typedef struct s_store {
 	t_list		*stacks[2];
 
@@ -40,12 +39,11 @@ typedef struct s_store {
 	int			from_top;
 	int			from_bottom;
 
-
 }	t_store;
 
 // **** util_func.c ****
 void	clear_before_exit(t_store *store);
-void	exit_error(char *msg);
+void	exit_error( __attribute__((unused)) char *msg);
 void	parse_and_check_input(char **arg, t_store *store);
 void	check_input(t_store *store);
 
@@ -78,11 +76,10 @@ I am using linked list for creating
 the stack a and stack b, these are
 the functions for it
 */
-void	display_stacks(t_store *store);
-void	display_node(void *data);
+// void	display_stacks(t_store *store);
+// void	display_node(void *data);
 
-void 	printIntArray(int arr[], int size);
-void 	printStrArray(char *arr[]);
-
+// void		printIntArray(int arr[], int size);
+// void		printStrArray(char *arr[]);
 
 #endif
