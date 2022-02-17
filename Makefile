@@ -27,9 +27,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CC_FLAGS) $(INCLUDE) -c $< -o $@
 
 test: all
-	@ARG="$(shell ./GenRandNum.sh $(max) $(size) | tr '\n' ' ')"; ./push_swap $$ARG
-	@./push_swap $$ARG | ./checker_Mac $$ARG
-	@echo $$ARG
+	ARG="$(shell ./GenRandNum.sh $(max) $(size) | tr '\n' ' ')"; ./push_swap $$ARG | tee output | ./checker_Mac $$ARG && cat output | wc -l
 clean:
 	@make clean -C libft
 	@rm -rf $(OBJ_DIR)
