@@ -1,6 +1,7 @@
 NAME = push_swap
 
-CC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
+# CC = gcc -Wall -Wextra -Werror -fsanitize=address -g3
+CC = gcc -Wall -Wextra -Werror
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -26,10 +27,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CC_FLAGS) $(INCLUDE) -c $< -o $@
 
 test: all
-	@echo "${GREEN}Running...${NC}"
-	@#./push_swap ARG="$(shell ./GenRandNum.sh $(min) $(max) $(size) | tr '\n' ' ')"
-	@ARG="$(shell ./GenRandNum.sh $(min) $(max) $(size) | tr '\n' ' ')"; ./push_swap $$ARG | ./checker_Mac $$ARG
-
+	@ARG="$(shell ./GenRandNum.sh $(max) $(size) | tr '\n' ' ')"; ./push_swap $$ARG
+	@./push_swap $$ARG | ./checker_Mac $$ARG
+	@echo $$ARG
 clean:
 	@make clean -C libft
 	@rm -rf $(OBJ_DIR)
