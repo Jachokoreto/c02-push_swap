@@ -6,7 +6,7 @@
 /*   By: jatan <jatan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:28:20 by jatan             #+#    #+#             */
-/*   Updated: 2022/02/14 13:49:10 by jatan            ###   ########.fr       */
+/*   Updated: 2022/02/14 16:45:10 by jatan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	*get_stack_content_rank(t_store *store, int stack_ch)
 	int		*num;
 	t_list	*tmp;
 
-	num = malloc(sizeof(int) * ft_lstsize(store->stacks[stack_ch]) + 1);
+	num = malloc(sizeof(int) * (ft_lstsize(store->stacks[stack_ch]) + 1));
 	if (!num)
 		return (NULL);
-	j = 0;
 	tmp = store->stacks[stack_ch];
+	j = 0;
 	while (tmp)
 	{
 		i = -1;

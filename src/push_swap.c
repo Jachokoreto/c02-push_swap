@@ -134,10 +134,11 @@ void	push_swap(t_store *store, char *input)
 	else
 		func_ch = 3;
 	stack_ch = input[ft_strlen(input) - 1] - 'a';
+	free(menu);
 	if (stack_ch <= 1)
 		store->ps_funcs[func_ch](&store->stacks[stack_ch],
 			&store->stacks[(stack_ch + 1) % 2]);
+	return ;
 	store->ps_funcs[func_ch](&store->stacks[1], &store->stacks[0]);
 	store->ps_funcs[func_ch](&store->stacks[0], &store->stacks[1]);
-	free(menu);
 }
