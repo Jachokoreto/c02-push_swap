@@ -11,7 +11,7 @@
 # 	echo $R
 # done
 
-awk -v loop=$3 -v range=$2 'BEGIN{
+awk -v loop=$2 -v range=$1 'BEGIN{
   srand()
   do {
     numb = 1 + int(rand() * range)
